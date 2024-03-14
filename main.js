@@ -1,9 +1,28 @@
-// var, let, const
-// var is global scope, seldom used now
-// let & const are block level
-// let can be reassigned
-let score;
+const myForm = document.querySelector('#my-form');
+const nameInput = document.querySelector('#name');
+const emailInput = document.querySelector('#email');
+const msg = document.querySelector('.msg');
+const userList = document.querySelector('#users');
 
-score = 10;
+myForm.addEventListener('submit', onSubmit);
 
-console.log(score);
+function onSubmit(e) {
+    e.preventDefault();
+
+    if (nameInput.value === '' || emailInput.value === '') {
+        msg.classList.add('error');
+        msg.innerHTML = "Please complete the fields"
+
+        setTimeout(() => msg.remove(), 3000);
+    }
+    else {
+        console.log('Success')
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(`${nameInput.value} : ${emailInput.value}`));
+
+        userList.appendChild(li);
+
+        nameInput.value = '';
+        emailInput.value = '';
+    }
+}
